@@ -1,0 +1,81 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion buildVersions.compileSdkVersion
+    buildToolsVersion buildVersions.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.zenx.paging"
+        minSdkVersion buildVersions.minSdkVersion
+        targetSdkVersion buildVersions.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0-alpha01"
+    }
+
+    buildFeatures {
+        viewBinding = true
+        //dataBinding = true
+    }
+
+    lintOptions {
+        // if set to true (default), stops the build if errors are found.
+        abortOnError false
+        // if true, only report errors.
+        ignoreWarnings true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    testImplementation 'junit:junit:4.12'
+
+    implementation(deps.kotlin.kotlin)
+    implementation(deps.kotlin.kotlin_coroutines_core)
+    implementation(deps.kotlin.kotlin_coroutines_android)
+
+    implementation(deps.androidx.core_ktx)
+    implementation(deps.androidx.appcompat)
+    implementation(deps.androidx.activity)
+    implementation(deps.androidx.fragment)
+
+    implementation(deps.lifecycle.viewmodel)
+    implementation(deps.lifecycle.livedata)
+
+    implementation(deps.hilt.android)
+    kapt(deps.hilt.android_compiler)
+    implementation(deps.hilt.viewmodel)
+    kapt(deps.hilt.viewmodel_compiler)
+
+    implementation(deps.http.okhttp)
+    implementation(deps.http.okhttp_logging)
+    implementation(deps.http.retrofit)
+    implementation(deps.http.retrofit_converter_gson)
+
+    implementation(deps.constraintlayout)
+    implementation(deps.recyclerview)
+
+    implementation(deps.paging)
+
+}
