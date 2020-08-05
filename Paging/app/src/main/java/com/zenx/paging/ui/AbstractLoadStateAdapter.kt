@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.zenx.paging.OnRetryListener
 import com.zenx.paging.databinding.AbcLoadStateBinding
 
 /**
@@ -13,7 +14,7 @@ import com.zenx.paging.databinding.AbcLoadStateBinding
  */
 class AbstractLoadStateAdapter : LoadStateAdapter<AbstractLoadStateAdapter.LoadStateViewHolder>() {
 
-    var onRetry: (() -> Unit)? = null
+    var onRetryListener: OnRetryListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,7 +24,7 @@ class AbstractLoadStateAdapter : LoadStateAdapter<AbstractLoadStateAdapter.LoadS
 
     override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) {
         holder.bindLoadState(loadState)
-        holder.viewBinding.root.setOnClickListener { onRetry?.invoke() }
+        holder.viewBinding.root.setOnClickListener { onRetryListener?.invoke() }
     }
 
     class LoadStateViewHolder(val viewBinding: AbcLoadStateBinding) :

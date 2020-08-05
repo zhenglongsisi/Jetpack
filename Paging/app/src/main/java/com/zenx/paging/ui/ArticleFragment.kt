@@ -27,7 +27,7 @@ class ArticleFragment : Fragment() {
 
     private val mPagingAdapter = ArticleAdapter()
     private val mLoadStateAdapter = AbstractLoadStateAdapter().apply {
-        onRetry = { mPagingAdapter.retry() }
+        onRetryListener = { mPagingAdapter.retry() }
     }
     private val mConcatAdapter: ConcatAdapter =
         mPagingAdapter.withLoadStateFooter(mLoadStateAdapter)
